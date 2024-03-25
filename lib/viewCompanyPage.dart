@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'main.dart';
+import 'viewAllCompanyPage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -153,7 +155,8 @@ class _ViewCompanyPage extends State<ViewCompanyPage> {
 
     };
     String jsonStr = jsonEncode(body);
-    http.put(url, body: jsonStr, headers: { "Content-Type" : "application/json"}).then((response) {
+    http.put(url, body: jsonStr, headers: {'Content-Type': 'application/json',
+    'Authorization': 'JWT ${GlobalVariables.accessToken}',}).then((response) {
       if (response.statusCode == 200) {
       Navigator.push(
                 context,

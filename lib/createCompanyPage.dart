@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'main.dart';
+import 'viewAllCompanyPage.dart';
+import 'model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -141,7 +143,10 @@ class _CreateCompanyPage extends State<CreateCompanyPage> {
 
     };
     String jsonStr = jsonEncode(body);
-    http.post(url, body: jsonStr, headers: { "Content-Type" : "application/json"}).then((response) {
+    http.post(url, body: jsonStr, headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'JWT ${GlobalVariables.accessToken}',
+  }).then((response) {
       if (response.statusCode == 200) {
       Navigator.push(
                 context,
